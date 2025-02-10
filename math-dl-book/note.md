@@ -317,6 +317,8 @@ loga(a^x)
 
 <br>
 
+## 4. 지수함수와 로그함수
+
 ### 로그함수 미분
 
 $y = log_e(x)$
@@ -332,3 +334,56 @@ $y' = (e^x)' = e^x$
 
 $y = a^x$
 $y' = log(a)a^x$
+
+<br>
+
+
+### 시그모이드 함수
+*주로 이진분류 binary classification에서 사용되는 함수*
+
+$y = \frac 1 {1+e^{-x}}$
+
+$y' = y(1-y)$
+
+#### 시그모이드 함수의 미분
+시그모이드 함수의 미분은 **원래의 함숫값만 사용해도** 미분값을 계산할 수 있다.
+
+<br>
+
+### 소프트맥스 함수
+*주로 다중분류 multi-class classification에서 사용되는 함수*
+
+$g(x_1, x_2, \cdots, x_n) = exp(x_1) + exp(x_2) + \cdots + exp(x_n)$
+
+이때 $y_1 + y_2 + \cdots + y_n = 1$
+
+따라서 확률값으로도 해석할 수 있다.
+
+
+#### 소프트맥스 함수의 편미분
+
+$y_i = \frac {exp(x_i)} {g(x_1, x_2, \cdots, x_n)}$
+
+$y_i' = y_i(1-y_i) (i = j)$
+
+$y_i' = -y_iy_j (i \ne j)$
+
+
+
+## 5. 확률과 통계
+
+중심극한정리: 이항분포의 시행횟수(n)가 무한히 많아지면 이항분포는 정규분포에 수렴한다.
+
+$P(X=k) \approx \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(k-np)^2}{2np(1-p)}\right)$
+
+
+어떤 사건의 누적된 확률을 구하고 싶을 때에는 정규분포의 확률밀도함수를 적분하면 된다. 이렇게 확률밀도함수를 적분한 것을 누적분포함수(cumulative distribution function, CDF)라고 한다.
+
+$P(X \le k) = \int_{-\infty}^k \frac{1}{\sqrt{2\pi\sigma^2}} \exp\left(-\frac{(x-np)^2}{2np(1-p)}\right) dx$
+
+
+그렇다면 왜 machine learning에서는 정규분포함수 대신 sigmoid 함수를 사용하는가?
+
+정규분포의 누적분포함수를 정확한 수식으로 표현할 수 없기 때문이다. 
+
+대신 시그모이드 함수를 사용하면 비슷한 특성을 가지면서도 계산이 훨씬 쉽고 효율적이기 때문에 머신러닝에서 널리 사용되고 있다.
